@@ -10,6 +10,7 @@
       <h3>Field</h3>
       <input id="hashField" name="hashField" type="text" readonly/>
       <h3>Value</h3>
+      <span id="invalid-span" class="hide" style="color:red">Invalid JSON!</span>
       <textarea id="hashFieldValue" name="hashFieldValue" style="width: 500px; height: 250px;"></textarea>
       <input id="hashConnectionId" name="hashConnectionId" hidden/>
       <br>
@@ -21,3 +22,10 @@
     <button id="editHashFieldButton" class="btn btn-primary" data-loading-text="<i class='icon-refresh'></i> Saving..." onclick="$('#editHashFieldForm').submit()">Save</button>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#hashFieldValue').bind('input propertychange', function() {
+      testJsonHashField();
+    });
+  });
+</script>

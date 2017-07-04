@@ -5,13 +5,20 @@
   <table class="table">
     <thead>
       <th>Field</th>
+      <th>JSON</th>
       <th>Value</th>
     </thead>
     <tbody>
     <% for(var field in data) { %>
       <tr>
           <td><%= field %></td>
-        <% console.log(field);%>
+          <% if (/^[\],:{}\s]*$/.test(data[field].replace(/\\["\\\/bfnrtu]/g, '@').
+             replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+             replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) { %>
+             <td style="color:green">&#10003;</td>
+          <% } else { %>
+             <td style="color:red">&#10005;</td>
+          <% } %>
         <% console.log(data[field]);%>
           <td><%= data[field] %></td>
         </tr>
@@ -26,7 +33,7 @@
       var key = "<%= key %>";
       var row = event.currentTarget;
       var field = row.children[0].innerHTML.toString();
-      var value = row.children[1].innerHTML.toString();
+      var value = row.children[2].innerHTML.toString();
 
       editHashRow(connectionId, key, field, value);
     });

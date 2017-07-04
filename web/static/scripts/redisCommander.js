@@ -583,6 +583,7 @@ function editHashRow (connectionId, key, field, value) {
   $('#hashKey').val(key);
   $('#hashField').val(field);
   $('#hashFieldValue').val(value);
+  testJsonHashField();
   $('#editHashRowModal').modal('show');
   setupEditHashButton();
 }
@@ -601,6 +602,19 @@ function removeZSetElement () {
 function removeHashField () {
   $('#hashFieldValue').val('REDISCOMMANDERTOMBSTONE');
   $('#editHashFieldForm').submit();
+}
+
+function testJsonHashField() {
+    var text = $('#hashFieldValue').val();
+    if (text && $('#invalid-span').length) {
+        if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
+            replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+            replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+            $('#invalid-span').addClass('hide');
+        } else {
+            $('#invalid-span').removeClass('hide');
+        }
+    }
 }
 
 var commandLineScrollTop;
