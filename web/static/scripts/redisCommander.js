@@ -607,14 +607,22 @@ function removeHashField () {
 function testJsonHashField() {
     var text = $('#hashFieldValue').val();
     if (text && $('#invalid-span').length) {
-        if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
-            replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-            replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+        if (isValidJSON(text)) {
             $('#invalid-span').addClass('hide');
         } else {
             $('#invalid-span').removeClass('hide');
         }
     }
+}
+
+function isValidJSON(string) {
+    try {
+        JSON.parse(string);
+    } catch (e) {
+        return false;
+    }
+
+    return true;
 }
 
 var commandLineScrollTop;

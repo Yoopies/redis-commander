@@ -12,9 +12,7 @@
     <% for(var field in data) { %>
       <tr>
           <td><%= field %></td>
-          <% if (/^[\],:{}\s]*$/.test(data[field].replace(/\\["\\\/bfnrtu]/g, '@').
-             replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-             replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) { %>
+          <% if (isValidJSON(data[field])) { %>
              <td style="color:green">&#10003;</td>
           <% } else { %>
              <td style="color:red">&#10005;</td>
